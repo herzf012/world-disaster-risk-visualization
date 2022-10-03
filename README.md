@@ -19,4 +19,6 @@ Our website showcases the risk of extreme natural events becoming a disaster fro
 ## Contents
 World Disaster Risk (148.41 kB): https://www.kaggle.com/datasets/tr1gg3rtrash/global-disaster-risk-index-time-series-dataset
 
+[Webpage Template](https://docs.google.com/drawings/d/1V-JbIPJy9bdkCUTaHoVpVRal77EPgxBa6xSO4RLJmV4/edit)
+
 ## Major Tasks
