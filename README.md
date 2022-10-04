@@ -3,7 +3,7 @@ World disaster risk visualization.
 
 
 # Overview
-Our website showcases the risk of extreme natural events becoming a disaster from 2011-2021 in 181 countries across the world. Using the data from the World Disaster Risk Dataset we will visualize the World Risk Index on each country by year. A second visualization will show 5 factors that go into making the World Disaster Risk each year by country. And lastly, we will visualize the World Risk Index category rank out of the 181 countries.
+Our website showcases the risk of extreme natural events becoming a disaster from 2011-2021 in 181 countries across the world. Using the data from the World Disaster Risk Dataset from Kaggle, we will visualize the World Risk Index on each country by year. A second visualization will show 5 factors that go into making the World Disaster Risk each year by country. And lastly, we will visualize the World Risk Index category rank out of the 181 countries.
 
  
 
@@ -17,9 +17,11 @@ Our website showcases the risk of extreme natural events becoming a disaster fro
 
 
 ## Contents
-World Disaster Risk (148.41 kB): https://www.kaggle.com/datasets/tr1gg3rtrash/global-disaster-risk-index-time-series-dataset
+* World Disaster Risk (148.41 kB): https://www.kaggle.com/datasets/tr1gg3rtrash/global-disaster-risk-index-time-series-dataset
 
-[Webpage Template](https://docs.google.com/drawings/d/1V-JbIPJy9bdkCUTaHoVpVRal77EPgxBa6xSO4RLJmV4/edit)
+* GeoJson for World Counties Boundaries (23 MB): https://datahub.io/core/geo-countries#javascript
+
+* [Webpage Template](https://docs.google.com/drawings/d/1V-JbIPJy9bdkCUTaHoVpVRal77EPgxBa6xSO4RLJmV4/edit)
 
 ## Major Tasks
 ### Region/Country Tasks:
@@ -69,6 +71,10 @@ World Disaster Risk (148.41 kB): https://www.kaggle.com/datasets/tr1gg3rtrash/gl
     * Decide speaking order
 
     * Ensure time management
+
+
+
+## Instructions
 
 
 
