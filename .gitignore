@@ -1,3 +1,7 @@
+# Remove API Key config.py
+
+config.py
+
 # Remove DS_Store
 .DS_Store
 
