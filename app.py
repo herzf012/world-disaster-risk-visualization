@@ -25,13 +25,7 @@ base.prepare(engine, reflect=True)
 
 # Choose the SQL table we wish to use. As we discussed in class, your tables
 # won't be available via reflection unless they contain a primary key. 
-table = base.classes.film
-
-# OPTIONAL - For MongoDB Use Only
-import pymongo 
-conn = 'mongodb://localhost:27017'
-client = pymongo.MongoClient(conn)
-db = client.geojson_db 
+table = base.world_risk_index
 
 # Instantiate the Flask application. (Chocolate cake recipe.)
 # This statement is required for Flask to do its job. 
@@ -72,24 +66,26 @@ def MapRoute():
 
 @app.route("/film")
 def FilmRoute():
-    ''' Queries the Pagila database from Class 9.2 for film information. '''
-
     # Open a session, run the query, and then close the session again
     session = Session(engine)
-    results = session.query(table.film_id, table.title, table.description).all()
+    results = session.query(table.id, table.region, table.wri,
+    table.exposure, table.vulnerability, table.susceptibility,
+    table.lack_of_coping_capabilities, table.lack_of_adaptive_capacities,
+    table.year, table.exposure_category, table.wri_category,
+    table.vulnerability_category, table.susceptibility_category).all()
     session.close()
 
     # Create a list of dictionaries, with each dictionary containing one row from the query. 
-    film_info = []
-    for id, title, description in results:
+    wri_info = []
+    for id in results:
         dict = {}
         dict["id"] = id
-        dict["title"] = title
-        dict["description"] = description
-        film_info.append(dict)
+        # dict["title"] = title
+        # dict["description"] = description
+        wri_info.append(dict)
 
     # Return the jsonified result. 
-    return jsonify(film_info)
+    return jsonify(wri_info)
 
 @app.route("/test")
 def TestRoute():
@@ -110,16 +106,6 @@ def DictionaryRoute():
              "White Wine": 0.25 }
     
     return jsonify(dict) # Return the jsonified version of the dictionary
-
-@app.route("/dict")
-def DictRoute():
-    ''' Does it WRONG and returns a dictionary directly.'''        
-
-    dict = { "one": 1,
-             "two": 2,
-             "three": 3 }
-    
-    return dict # WRONG! Don't return a dictionary! Ever! Return a JSON instead. 
   
 @app.route("/readjsonfile/<filename>")
 def ReadJsonFileRoute(filename):    
@@ -142,38 +128,6 @@ def ReadJsonFileRoute(filename):
     print('Returning data from a file')
 
     return jsonify(json_data)
-
-@app.route("/readmongodb")
-def ReadMongoDB():
-    ''' Queries MongoDB for all entries in the maps collection and then
-        returns the first one to the user. '''
-
-    # Query the maps table
-    result = db.maps.find()
-
-    # Note: MongoDB operates on BSONs, which are binary JSONs, and the '_id' in 
-    # each 'document' is really a pointer (think: memory location) to additional
-    # data that makes the database work. That pointer will cause an error when
-    # you try to jsonify() the raw data that gets returned from a MongoDB query. 
-    #
-    # One solution is simply to remove the '_id' from the 'document' 
-    # and throw it away, which is what we'll do here. The 
-    # remaining 'document' can then be jsonified. 
-
-    result_list = list(result)
-    if len(result_list) > 0:
-        # Return the first result only and strip off the '_id'
-        data = result_list[0] 
-        id_to_discard = data.pop('_id', None)
-    else:
-        # Construct an error message
-        data = {'Error': 'No data found'}        
-
-    print('Returning data from MongoDB')
-
-    return jsonify(data)
-
-   
 
 # This statement is required for Flask to do its job. 
 # Think of it as chocolate cake recipe. 
