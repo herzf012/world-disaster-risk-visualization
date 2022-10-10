@@ -1,23 +1,33 @@
-,alpha2,Regions
-0,SZ,Swasiland
-1,MK,Mazedonien
-2,CZ,Tschechische Republik
-3,KR,Südkorea
-4,AE,Vereinigte Arabisch Emirate
-5,SR,Surinam
-6,MD,Moldawien
-7,BY,Weißrussland
-8,TZ,United Republic of Tanzania
-9,MK,North Macedonia
-10,MD,Republic of Moldova
-11,KR,Korea Republic of
-12,LY,Libyan Arab Jamahiriya
-13,ST,São Tomé and Príncipe
-14,AT,Österreich
-15,DE,Deutschland
-16,NO,Norwegen
-17,RO,Romänien
-18,MN,Mongolien
-19,MK,Republic of Macedonia
-20,LA,Lao People's Democ. Republic
-21,KR,Korea Republic of .
+German,iso_code
+Swasiland,SZ
+Mazedonien,MK
+Tschechische Republik,CZ
+Südkorea,KR
+Vereinigte Arabisch Emirate,AE
+Vereinigte Staaten v. A.,US
+Vereinigte Staaten von Amerika,US
+Ver. Staaten von Amerika,US
+Surinam,SR
+Moldawien,MD
+Weißrussland,BY
+Zentralafrik. Republik,CF
+Ver. Arabische Emirate,AE
+United Republic of Tanzania,TZ
+T. f. Yugo. Rep. of Macedonia,MK
+Republic of Moldova,MD
+Korea Republic of,KR
+Libyan Arab Jamahiriya,LY
+Demokratische Rep. Kongo,CD
+Föd. Staaten von Mikronesien,FM
+Föd. Staaten v. Mikronesien,FM
+São Tomé and Príncipe,ST
+St. Vincent und d. Grenadinen,VC
+St. Vincent u. d. Grenadinen,VC
+St. Vincent u. die Grenadinen,VC
+Österreich,AT
+Deutschland,DE
+Norwegen,NO
+Romänien,RO
+Mongolien,MN
+Republic of Macedonia,MK
+Lao People's Democ. Republic,LA
