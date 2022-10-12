@@ -1,17 +1,21 @@
-CREATE TABLE "world_risk_index" (
-	"id" int NOT NULL PRIMARY KEY,
-    "region" text NOT NULL,
-    "wri" float NOT NULL,
-	"exposure" float NOT NULL,
-    "vulnerability" float NOT NULL,
-    "susceptibility" float NOT NULL,
-    "lack_of_coping_capabilities" float NOT NULL,
-	"lack_of_adaptive_capacities" float NOT NULL,
-	"year" int NOT NULL,
-	"exposure_category" text NOT NULL,
-	"wri_category" text NOT NULL,
-	"vulnerability_category" text NOT NULL,
-	"susceptibilty_category" text NOT NULL
+-- Don't drop unless you're sure!
+DROP TABLE world_risk_index;
+
+CREATE TABLE world_risk_index (
+ 	id SERIAL NOT NULL PRIMARY KEY,
+    country_name text,
+	iso_code text,
+	year int,
+    wri float,
+	exposure float,
+    vulnerability float,
+    susceptibility float,
+    coping_inability float,
+	adaptive_inability float,
+	wri_category text,
+	exposure_category text,
+	vulnerability_category text,
+	susceptibilty_category text
 );
 
 SELECT * FROM world_risk_index;
