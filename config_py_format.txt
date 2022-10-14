@@ -1,0 +1,6 @@
+"Enter information, save as config.py"
+
+sql_username = "" # PostgreSQL username
+sql_password = "" # PostgreSQL password
+sql_database = "" # PostgreSQL database name
+sql_port_number = "" # PostgreSQL server port number
