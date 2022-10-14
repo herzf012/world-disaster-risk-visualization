@@ -80,7 +80,7 @@ def WriRoute():
     for id, country_name, wri, exposure, vulnerability, susceptibility,coping_inability, adaptive_inability, year, exposure_category, wri_category,  vulnerability_category, susceptibilty_category in results:
         dict = {}
         dict["id"] = id
-        dict["region"] = country_name
+        dict["country_name"] = country_name
         dict["wri"] = wri
         dict["exposure"] = exposure
         dict["vulnerability"] = vulnerability
