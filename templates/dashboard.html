@@ -83,7 +83,7 @@
   <br>
   <br>
 
-   <!-- Adding the first plot  -->
+   <!-- Adding the first plot 
    <div class="container">
     <div class="row">
       <div class="col-lg-6 col-md-12">
@@ -93,8 +93,8 @@
         </div>
       </div>
 
-      <!-- Adding the secont plot -->
-      <div class="col-lg-5 col-md-12">
+      <!- Adding the secont plot -->
+      <!-- <div class="col-lg-5 col-md-12">
         <div class="row">
         <div class="col- lg-6 col-md-12">
           <div id="plot2">
@@ -105,9 +105,56 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --> 
           
+<!-- The div that holds our map: HYEEUN -->
+<div class ="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="well">
+        <h4>Year:</h4>
+        <select id="selDataset" onchange="buildPlot()"></select>
+      </div>
+</div>
+    <div class="col-sm-6 col-md-6">
+      <div id="map-id"></div>
+        <div class="info"></div>
+        <div id="range-slider-1"></div>
+        <div class="leadlet -top leaflet-right"></div>
+        <div class="info leaflet-control"></div>
+    </div>
 
+    <div id="sample-metadata">
+
+    </div>
+
+    <div class="col-md-6">
+      <h5>Choose a year on the drop down menu and click on the map to choose country</h4>
+      <h6>Mouse hover on the line chart</h6>
+      <h7>Mouse over the barchart for more information</h7>
+      <div class="about">
+        <a href="/about">About The Dashboard</a>
+      <div class="text1 text-center"></div> 
+      <div class="text2 text-center"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div id="lineChart">
+          <div id="chart"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div id="barChart">
+        <div id="bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
     
 
