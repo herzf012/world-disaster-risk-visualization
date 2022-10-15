@@ -2,7 +2,7 @@ console.log("Loaded plot.js");
 
 let user_year = "2021";
 let user_category = "wri_category";
-let user_country_name = "Vanuatu";
+let user_country_name = "United States of America";
 
 
 
@@ -148,16 +148,25 @@ function DrawLineChart(selected_country_name) {
         let my_data = data.filter(element => element.country_name == selected_country_name);
 
         console.log(my_data);
+        console.log(my_data.map(element => element.year));
 
         var options = {
             series: [
             {
-                name: "High - 2013",
-                data: [28, 29, 33, 36, 32, 32, 33]
+                name: "WRI",
+                data: my_data.map(element => element.wri)
             },
             {
-                name: "Low - 2013",
-                data: [12, 11, 14, 18, 17, 13, 13]
+                name: "Exposure",
+                data: my_data.map(element => element.exposure)
+            },
+            {
+                name: "Vulnerability",
+                data: my_data.map(element => element.vulnerability)
+            },
+            {
+                name: "Susceptibility",
+                data: my_data.map(element => element.susceptibility)
             }
             ],
             chart: {
@@ -175,39 +184,38 @@ function DrawLineChart(selected_country_name) {
                     show: false
                 }
             },
-            colors: ['#77B6EA', '#545454'],
             dataLabels: {
-                enabled: true,
+                enabled: false,
             },
             stroke: {
                 curve: 'smooth'
             },
             title: {
-                text: 'Average High & Low Temperature',
+                text: 'WRI, Exposure, Vulnerability and Susceptibility Over Time',
                 align: 'left'
             },
             grid: {
                 borderColor: '#e7e7e7',
                 row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
                 },
             },
             markers: {
                 size: 1
             },
             xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                categories: my_data.map(element => element.year),
                 title: {
-                    text: 'Month'
+                    text: 'Year'
                 }
             },
             yaxis: {
                 title: {
-                    text: 'Temperature'
+                    text: 'Score'
                 },
-                min: 5,
-                max: 40
+                min: 0,
+                max: 100
             },
             legend: {
                 position: 'top',
@@ -222,7 +230,7 @@ function DrawLineChart(selected_country_name) {
           chart.render();
         
     });
-    
+
 };
 
 DrawPieChart(user_category, user_year);
