@@ -91,7 +91,7 @@ def WriRoute():
         dict["exposure_category"] = exposure_category 
         dict["wri_category"] = wri_category
         dict["vulnerability_category"] = vulnerability_category
-        dict["susceptibilty_category"] = susceptibilty_category  
+        dict["susceptibility_category"] = susceptibilty_category  
         wri_info.append(dict)
 
     # Return the jsonified result. 

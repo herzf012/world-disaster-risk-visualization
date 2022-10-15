@@ -38,12 +38,26 @@ d3.json("/wri_index").then(function (data) {
 // LIEF'S CODE BELOW
 function DrawPieChart(category, selected_year) {
 
+    console.log(category);
     console.log("DrawPieChart");
 
     d3.json("/wri_index").then(data => {
 
+        let chart_title = "";
+        if (category == "wri_category") {
+            chart_title = `WRI Category ${selected_year}`;
+        } else if (category == "exposure_category") {
+            chart_title = `Exposure Category ${selected_year}`;
+        } else if (category == "vulnerability_category") {
+            chart_title = `Vulnerability Category ${selected_year}`;
+        } else {
+            chart_title = `Susceptibility Category ${selected_year}`;
+        };
+
         let my_data = data.filter(element => element.year == selected_year);
         let my_sample = my_data.map(element => element[category]);
+
+        console.log(`${category} values: ${my_sample}`);
 
         let rank_count = {
             very_low: 0,
@@ -53,8 +67,6 @@ function DrawPieChart(category, selected_year) {
             very_high: 0,
             na: 0
         };
-
-        console.log(my_sample);
 
         for (let i = 0; i < my_sample.length; i++) {
             if (my_sample[i] == "Very Low") {
@@ -73,14 +85,34 @@ function DrawPieChart(category, selected_year) {
         };
 
         console.log(rank_count);
-        console.log(Object.keys(rank_count));
 
         var options = {
+            plotOptions: {
+                pie: {
+                    donut: {
+                        labels: {
+                            show: true,
+                            name:{
+                                show: true
+                            },
+                            value: {
+                                show: true
+                            }
+                        }
+                    }
+                }
+            },
             series: [rank_count.very_low, rank_count.low, rank_count.medium, rank_count.high, rank_count.very_high, rank_count.na],
             labels: ["Very Low", "Low", "Medium", "High", "Very High", "NA"],
             chart: {
                 type: 'donut'
             },
+            title: {
+                text: chart_title,
+                align: "center",
+                offsetX: -50
+            },
+            colors: ["#3498DB", "#27AE60", "#F1C40F", "#E67E22", "#C0392B", "#7F8C8D"],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -99,7 +131,10 @@ function DrawPieChart(category, selected_year) {
 
     })
 
-}
+};
 
 DrawPieChart("wri_category", user_year);
+// DrawPieChart("exposure_category", user_year);
+// DrawPieChart("vulnerability_category", user_year);
+// DrawPieChart("susceptibility_category", user_year);
 // LIEF'S CODE ABOVE
