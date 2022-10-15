@@ -29,6 +29,9 @@
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
 
+    <!-- Import APEX Chart code -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
 
@@ -83,8 +86,8 @@
   <br>
   <br>
 
-   <!-- Adding the first plot  -->
-   <div class="container">
+  <!-- Adding the first plot  -->
+  <div class="container">
     <div class="row">
       <div class="col-lg-6 col-md-12">
         <div id="plot1">
@@ -92,6 +95,9 @@
           <script src="static/js/plot.js"></script>
         </div>
       </div>
+    </div>
+  </div>
+  
 
       <!-- Adding the secont plot
       <div class="col-lg-5 col-md-12">
@@ -108,8 +114,21 @@
   </div>
            -->
 
+  <!-- Adding APEX Charts -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-6">
+        <div id="apex-line-chart"></div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div id="apex-donut-chart"></div>
+      </div>
+    </div>
+  </div>      
+
     <!-- Import the Bootstrap JavaScript code -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 </body>
   
   
