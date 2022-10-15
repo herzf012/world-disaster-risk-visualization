@@ -138,18 +138,17 @@ function DrawPieChart(category, selected_year) {
 
 };
 
+// Function to draw a line chart by country name
 function DrawLineChart(selected_country_name) {
 
     console.log("DrawLineChart");
-    console.log(selected_country_name);
 
     d3.json("/wri_index").then(data => {
 
+        // Select data for specific country over the years
         let my_data = data.filter(element => element.country_name == selected_country_name);
 
-        console.log(my_data);
-        console.log(my_data.map(element => element.year));
-
+        // Set up options for ApexChart
         var options = {
             series: [
             {
@@ -197,7 +196,7 @@ function DrawLineChart(selected_country_name) {
             grid: {
                 borderColor: '#e7e7e7',
                 row: {
-                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    colors: ['#f3f3f3', 'transparent'],
                     opacity: 0.5
                 },
             },
@@ -225,9 +224,10 @@ function DrawLineChart(selected_country_name) {
                 offsetX: -5
             }
         };
-  
-          var chart = new ApexCharts(document.querySelector("#apex-line-chart"), options);
-          chart.render();
+        
+        // Plot line chart
+        var chart = new ApexCharts(document.querySelector("#apex-line-chart"), options);
+        chart.render();
         
     });
 
