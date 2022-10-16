@@ -35,7 +35,8 @@ let myMap = L.map("map", {
 
 
 // HYEEUN
-// world map w/ country code
+// World map w/ country code 
+// Change 2 letter country code to 3 letter as geojson allows ISO-A3 only
 let countryCode = {'Vanuatu': 'VUT',
 'Bolivia (Plurinational State of)': 'BOL',
 'Jordan': 'JOR',
@@ -210,6 +211,8 @@ let countryCode = {'Vanuatu': 'VUT',
 'Myanmar': 'MMR',
 'Zambia':'ZMB'}
 // Create function that will apply when click different country on the map
+// Loop through each of counry code 
+// Add .toUpperCase because country codes are written in all cap
 var countryName = "Zambia";
 
 function nameToAbbr(name) {
@@ -278,13 +281,15 @@ function getIndexes(list, query){
     }
     return filteredID
 }
+// Create drop down menu by inserting year in the fuction below
 
 function buildPlot(){
     d3.json("../static/data/english_dataset.json").then((data) =>{
         console.log(data)
+        
         // get list of all data
         let idValues = data.year;
-        // Create drop down menu by inserting year in the fuction below
+        // Create unique value because each row has year
         let uniqueYears = [];
 
         idValues.forEach(year => {
@@ -292,20 +297,42 @@ function buildPlot(){
                 uniqueYears.push(year)
             }
         });
+        // Remove duplicate value in the drop down
+
+        d3.select('#selDataset').html("")
 
         uniqueYears.forEach(year => {
             d3.select('#selDataset').append('option').text(year).property("value", year);
         })
+// Remove duplicate value in the drop down
+{/* <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script> */}
+//     <script>
+//     function removeduplicate(){
+
+//         let uniqueYears = {};
+//         $("select[id='mylist'] > option").each(function () {
+//         if(mycode[this.text]) {
+//         $(this).remove();
+//         } else {
+
+//         uniqueYears[this.text] = this.value;
+//         }
+//     });
+//     }
+// </script>
 
 
-        // Use D3 to select current ID and store in a variable to work with
+        // Use D3 to select country year and store in a variable to work with
+        // Select all dataset and get node
         let currentID = d3.selectAll("#selDataset").node().value;
 
         let filteredID = getIndexes(data.year, currentID)
 
         // console.log(filteredID)
         
-        // Create trace for vertical bar chart 
+        // Create trace for vertical bar chart
+        // set x w/ country name 
+        // set y w/ wri
         let trace1 = {
             x: filteredID.map(id => data.country_name[id]),
             y: filteredID.map(id => data.wri[id]),
@@ -326,15 +353,21 @@ function buildPlot(){
             // }
         };
         // Use plotly to create new bar
+        // Add responsive:true to be adjustable by window size
         Plotly.newPlot("barChart", dataPlot, layout, {responsive: true});
 
         // Create the WRI panel
+        // country name
+        // country index which takes year
         let filteredCountryIndexes = getIndexes(data.country_name, countryName);
 
         filteredMeta = filteredCountryIndexes.filter(countryIdx => filteredID.indexOf(countryIdx) != -1)[0];
         ///data.country_name.filter(entry => entry == countryName);
 
         console.log(filteredMeta);
+        // go to data
+        // go to country_name
+        // get the index of filteredmeta
 
         let wri = {
             // 'id: ': data.id[filteredMeta],
