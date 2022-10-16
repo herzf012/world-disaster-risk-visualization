@@ -6,38 +6,6 @@ let user_category = "wri_category";
 let user_country_name = "United States of America";
 
 
-
-// d3.json("/wri_index").then(function (data) {
-
-//     console.log(data[0]['country_name']);
-
-//     // let years = data.map(year => year.year);
-
-//     // console.log(years)
-
-//     // Create the trace
-//     let trace = {
-//         x: data.map(wri => wri.wri),
-//         y: data.map(year => year.year),
-//         type: "bar"
-//     };
-
-//     // Put the trace into an array (which allows us to graph
-//     // multiple traces, if we wish)
-//     let traceData = [trace];
-
-//     // Define a layout object
-//     let layout = {
-//         title: "World Risk Index by Year",
-//         xaxis: { title: "Year"},
-//         yaxis: { title: "WRI"}
-//     };
-
-//     // Create the plot
-//     Plotly.newPlot("plot1", traceData, layout); 
-
-// });
-
 // LIEF'S CODE BELOW
 
 // Function to draw a donut chart by category and year
@@ -250,3 +218,26 @@ function DrawPlots() {
 DrawPlots();
 
 // LIEF'S CODE ABOVE
+
+// Create trace for vertical bar chart 
+let trace1 = {
+    x: filteredID.map(id => data.country_name[id]),
+    y: filteredID.map(id => data.wri[id]),
+    text: "World Risk Index",
+    type:"bar",
+    orientation:'v'
+};
+
+// Create data
+let dataPlot = [trace1];
+let layout ={
+    title: "Top 100 Least WRI Countries",
+    // margin:{
+    //     l:75,
+    //     r:100,
+    //     t:60,
+    //     b:60
+    // }
+};
+// Use plotly to create new bar
+Plotly.newPlot("barChart", dataPlot, layout, {responsive: true});

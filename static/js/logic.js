@@ -10,29 +10,6 @@ let myMap = L.map("map", {
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(myMap);
-  
-
-// //   link to GeoJson
-// let link = "https://datahub.io/core/geo-countries/r/countries.geojson"
-
-// let mapStyle = {
-//     color: "yellow",
-//     fillColor: "purple",
-//     fillOpacity: 0.5,
-//     weight: 1.5
-// };
-
-// // getting GeoJson data 
-// d3.json(link).then(function(data) {
-//     console.log(data)
-//     L.geoJson(data, {
-//         style: mapStyle
-//     }).addTo(myMap);
-// });
-
-// Look at 15:2:4 for example on creating the choroplethdata
-
-
 
 // HYEEUN
 // world map w/ country code
@@ -208,7 +185,8 @@ let countryCode = {'Vanuatu': 'VUT',
 'Samoa': 'WSM',
 'Kyrgyzstan': 'KGZ',
 'Myanmar': 'MMR',
-'Zambia':'ZMB'}
+'Zambia':'ZMB'};
+
 // Create function that will apply when click different country on the map
 var countryName = "Zambia";
 
@@ -227,7 +205,7 @@ function nameToAbbr(name) {
     else{
         return "ERROR";
     }
-}
+};
 
 function AbbrToName(abbr){
     let name ="";
@@ -245,7 +223,7 @@ function AbbrToName(abbr){
     else{
         return "ERROR";
     }
-}
+};
 
 function bounds(array1, array2) {
     let newArray = []
@@ -256,16 +234,16 @@ function bounds(array1, array2) {
         newArray.push(array2[i]);
     };
     return d3.extent(newArray);
-}
+};
 
 // Create function to build initial plot 
 function init(){
     buildPlot()
-}
+};
 // Create function that will apply when Year changes
 function optionChnaged(){
     buildPlot();
-}
+};
 
 
 function getIndexes(list, query){
@@ -277,7 +255,7 @@ function getIndexes(list, query){
         }
     }
     return filteredID
-}
+};
 
 function buildPlot(){
     d3.json("../static/data/english_dataset.json").then((data) =>{
@@ -295,13 +273,13 @@ function buildPlot(){
 
         uniqueYears.forEach(year => {
             d3.select('#selDataset').append('option').text(year).property("value", year);
-        })
+        });
 
 
         // Use D3 to select current ID and store in a variable to work with
         let currentID = d3.selectAll("#selDataset").node().value;
 
-        let filteredID = getIndexes(data.year, currentID)
+        let filteredID = getIndexes(data.year, currentID);
 
         // console.log(filteredID)
         
@@ -363,39 +341,6 @@ function buildPlot(){
         });
 
         console.log(wri);
-        // Create the trace for the multiple line graph
-        let trace2 ={
-            x : filteredCountryIndexes.map(id => data.year[id]),
-            y : filteredCountryIndexes.map(id => data.exposure[id]),
-           name : "Exposure",
-            mode : 'lines',
-            marker: {
-                color : "red"
-            }
-        }
-
-        let traceVulnerability = {
-            x : filteredCountryIndexes.map(id => data.year[id]),
-            y : filteredCountryIndexes.map(id => data.vulnerability[id]),
-           name: "Vulnerability",
-            mode : 'lines',
-            marker: {
-                color : "blue"
-            }
-        }
-        
-        // }
-
-        let data2 = [trace2, traceVulnerability]
-//, susceptibility, coping_inability, adaptive_inability,
-        //create layout for the multiline chart
-        let layout2 = {
-            title : 'Country Statistics Over the Years',
-            showlegend : true, 
-        }
-
-        Plotly.newPlot('lineChart', data2, layout2, {responsive: true})
-        console.log(filteredID)
 
 
         // Have to build the map around current year's values
