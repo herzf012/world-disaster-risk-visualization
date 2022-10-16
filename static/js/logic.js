@@ -317,17 +317,17 @@ function buildPlot(){
         let wri = {
             // 'id: ': data.id[filteredMeta],
             'Country Name: ': data.country_name[filteredMeta],
-            'Year: ': currentID,
+            // 'Year: ': currentID,
             'Weather Risk Index Score: ': data.wri[filteredMeta],
             'Weather Risk Index Category: ': data.wri_category[filteredMeta],
-            'Exposure: ': data.exposure[filteredMeta],
-            'Vulnerability: ': data.vulnerability[filteredMeta],
-            'Susceptibility: ': data.susceptibility[filteredMeta],
-            'Coping Inability: ': data.coping_inability[filteredMeta],
-            'Adaptive Inability: ': data.adaptive_inability[filteredMeta],
-            'Exposure Category: ': data.exposure_category[filteredMeta],
-            'Vulnerability Category: ': data.vulnerability_category[filteredMeta],
-            'Susceptibility Category: ': data.susceptibility_category[filteredMeta]
+            // 'Exposure: ': data.exposure[filteredMeta],
+            // 'Vulnerability: ': data.vulnerability[filteredMeta],
+            // 'Susceptibility: ': data.susceptibility[filteredMeta],
+            // 'Coping Inability: ': data.coping_inability[filteredMeta],
+            // 'Adaptive Inability: ': data.adaptive_inability[filteredMeta],
+            // 'Exposure Category: ': data.exposure_category[filteredMeta],
+            // 'Vulnerability Category: ': data.vulnerability_category[filteredMeta],
+            // 'Susceptibility Category: ': data.susceptibility_category[filteredMeta]
         }
         //select the id to append the key value pair under WRI panel
         panelBody = d3.select("#sample-metadata")
@@ -382,12 +382,12 @@ function buildPlot(){
             } else {
                 return 0;
             }
-        }
+        };
 
         function mapStyle(feature)  {
             return {
-            color: "yellow",
-            fillColor: "purple",
+            color: "#fff",
+            fillColor: "#b10026",
             fillOpacity: getOpacity(feature.properties.ISO_A3),
             weight: 1.5
             }
@@ -416,6 +416,34 @@ function buildPlot(){
 
 
     });
+
+
+//     let legend = L.control({ position: "bottomright" });
+//     legend.onAdd = function() {
+//       let div = L.DomUtil.create("div", "info legend");
+//       let limits = geojson.options.limits;
+//       let colors = geojson.options.colors;
+//       let labels = [];
+  
+//       // Add the minimum and maximum.
+//       let legendInfo = "<h1>Population with Children<br />(ages 6-17)</h1>" +
+//         "<div class=\"labels\">" +
+//           "<div class=\"min\">" + limits[0] + "</div>" +
+//           "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+//         "</div>";
+  
+//       div.innerHTML = legendInfo;
+  
+//       limits.forEach(function(limit, index) {
+//         labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+//       });
+  
+//       div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+//       return div;
+//     };
+  
+// // Adding the legend to the map
+// legend.addTo(myMap);
 
 
     

@@ -3,7 +3,7 @@ console.log("Loaded plot.js");
 // Temporary hardcoded input values
 let user_year = "2021";
 let user_category = "wri_category";
-let user_country_name = "United States of America";
+let user_country_name = "Zambia";
 
 
 // LIEF'S CODE BELOW
@@ -219,25 +219,3 @@ DrawPlots();
 
 // LIEF'S CODE ABOVE
 
-// Create trace for vertical bar chart 
-let trace1 = {
-    x: filteredID.map(id => data.country_name[id]),
-    y: filteredID.map(id => data.wri[id]),
-    text: "World Risk Index",
-    type:"bar",
-    orientation:'v'
-};
-
-// Create data
-let dataPlot = [trace1];
-let layout ={
-    title: "Top 100 Least WRI Countries",
-    // margin:{
-    //     l:75,
-    //     r:100,
-    //     t:60,
-    //     b:60
-    // }
-};
-// Use plotly to create new bar
-Plotly.newPlot("barChart", dataPlot, layout, {responsive: true});
