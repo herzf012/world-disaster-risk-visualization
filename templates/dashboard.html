@@ -57,101 +57,94 @@
   </nav>
 
 
+  <!-- Adding a title -->
   <div class="container">
 
     <div class="row">
 
-      <div class="col-lg-6 col-md-12">
-        <!-- The div that holds our map -->
-        <div id="map" style="width:600px; height: 400px"></div>
-  
-        <!-- Our JavaScript file -->
-        <script type="text/javascript" src="../static/js/logic.js"></script>
-      
+      <div class="text-center">
+            <h1>How to Work the Dashboard</h1>
+            <br>
+            <br>
       </div>
-
-      <div class="col-lg-5 col-md-12">
-
-        <h3>How to Work the Dashboard</h3>
-        <br>
-        <br>
-        <p>This would be where we put super awesome instructions about how to work the dashboard. this would include the interactive map, bar chart, and line graph. I'm just now typing more placeholder words so we can see what this would look like. I think we are doing a really great job! Great Work Team!</p>
-
-      </div>
-
     </div>
-
   </div>
 
-  <br>
-  <br>
-
-  <!-- Adding the first plot  -->
+  <!-- Adding the instructions for the dashboard  -->
   <div class="container">
     <div class="row">
       <div class="col-lg-6 col-md-12">
-        <div id="plot1">
-          <script src=""></script>
-          <script src="static/js/plot.js"></script>
+        <div class="row">
+          <p>Use the drop down bar to select the year you would like to see on the map. To see specific values for a country, click on that country on the map. This will update the values underneth the drop down bar. This will also update the Country Statistics Over the Years line graph, showing the vulnerability and Exposure for the country you selected. Hover your mouse over the line graph to see the specific values and the year.</p>
+          <br>
+          <p>Once you have clicked on a country this will update the line graph below. The graph will show you the WRI, Exposure, Vulnerability and Susceptibility over the years for the country you have selected.</p>
         </div>
       </div>
+
+      <div class="col-lg-5 col-md-12"> 
+       <div class ="row">
+        <p>this is where I will put the infromation about the pie chart once I know what it does, but it looks very nice.</p> 
+        <br>
+        <p>The bar chart shows the Top 100 Contries with the lowest World Risk Index. Hover your mouse over the graph to see the specific value and the country.</p>
+        </div>    
+       </div>         
+    </div>      
     </div>
-  </div>
+
+    <br>
+    <br>
+
+    <!-- The map  -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <!-- The div that holds our map -->
+          <div id="map" style="width:600px; height: 400px"></div>
   
-      <!-- Adding the secont plot
-      <div class="col-lg-5 col-md-12">
-        <div class="row">
-        <div class="col- lg-6 col-md-12">
-          <div id="plot2">
-          <script src=""></script>
-          <script src="static/js/plot.js"></script>
+          <!-- Our JavaScript file -->
+          <script type="text/javascript" src="../static/js/logic.js"></script>
+      
+        </div>
+
+    <!-- The drop down bar and data  -->
+        <div class="col-lg-5 col-md-12">
+          <div class="well">
+            <h5>Year :</h5>
+            <select id="selDataset" onchange="buildPlot()"></select>
+          </div> 
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Country Information</h3>
+            </div>
+            <div id="sample-metadata" class="panel-body"></div>
           </div>
         </div>
-        </div>
       </div>
     </div>
-  </div> --> 
-          
+
+  <br>
+  <br>
+
+  <!-- Adding APEX Charts -->
+ <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-6">
+      <div id="apex-line-chart"></div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div id="apex-donut-chart">
+        <script src="static/js/plot.js"></script>
+      </div>
+    </div>
+  </div>
+</div>      
+
+<br>
+<br>
+
 <!-- The div that holds our map: HYEEUN -->
 <div class ="container-fluid">
   <div class="row">
-    <div class="col-md-2">
-      <div class="well">
-        <h4>Year:</h4>
-        <select id="selDataset" onchange="buildPlot()"></select>
-      </div>
-</div>
-    <div class="col-sm-6 col-md-6">
-      <div id="map-id"></div>
-        <div class="info"></div>
-        <div id="range-slider-1"></div>
-        <div class="leadlet -top leaflet-right"></div>
-        <div class="info leaflet-control"></div>
-    </div>
-
-    <div id="sample-metadata">
-
-    </div>
-
-    <div class="col-md-6">
-      <h5>Choose a year on the drop down menu and click on the map to choose country</h4>
-      <h6>Mouse hover on the line chart</h6>
-      <h7>Mouse over the barchart for more information</h7>
-      <div class="about">
-        <a href="/about">About The Dashboard</a>
-      <div class="text1 text-center"></div> 
-      <div class="text2 text-center"></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div id="lineChart">
-          <div id="chart"></div>
-        </div>
-      </div>
-    </div>
-
     <div class="col-md-12">
       <div id="barChart">
         <div id="bar"></div>
@@ -161,17 +154,9 @@
 </div>
 </div>
 
-  <!-- Adding APEX Charts -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-6">
-        <div id="apex-line-chart"></div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div id="apex-donut-chart"></div>
-      </div>
-    </div>
-  </div>      
+
+
+      
 
     <!-- Import the Bootstrap JavaScript code -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
