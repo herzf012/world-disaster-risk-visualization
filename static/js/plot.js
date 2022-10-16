@@ -1,5 +1,6 @@
 console.log("Loaded plot.js");
 
+// Temporary hardcoded input values
 let user_year = "2021";
 let user_category = "wri_category";
 let user_country_name = "United States of America";
@@ -8,9 +9,9 @@ let user_country_name = "United States of America";
 // LIEF'S CODE BELOW
 
 // Function to draw a donut chart by category and year
-function DrawPieChart(category, selected_year) {
+function DrawPiePlot(category, selected_year) {
 
-    console.log("DrawPieChart");
+    console.log("DrawPiePlot");
 
     d3.json("/wri_index").then(data => {
 
@@ -107,14 +108,18 @@ function DrawPieChart(category, selected_year) {
 };
 
 // Function to draw a line chart by country name
-function DrawLineChart(selected_country_name) {
+function DrawLinePlot(selected_country_name) {
 
-    console.log("DrawLineChart");
+    console.log("DrawLinePlot");
 
     d3.json("/wri_index").then(data => {
 
         // Select data for specific country over the years
         let my_data = data.filter(element => element.country_name == selected_country_name);
+
+        let country_name = my_data.map(element => element.country_name)[0];
+
+        console.log(country_name);
 
         // Set up options for ApexChart
         var options = {
@@ -158,7 +163,7 @@ function DrawLineChart(selected_country_name) {
                 curve: 'smooth'
             },
             title: {
-                text: 'WRI, Exposure, Vulnerability and Susceptibility Over Time',
+                text: `Scores for ${country_name}`,
                 align: 'left'
             },
             grid: {
@@ -201,11 +206,17 @@ function DrawLineChart(selected_country_name) {
 
 };
 
-DrawPieChart(user_category, user_year);
-DrawLineChart(user_country_name);
-// DrawPieChart("exposure_category", user_year);
-// DrawPieChart("vulnerability_category", user_year);
-// DrawPieChart("susceptibility_category", user_year);
+// Function to draw all plots
+function DrawPlots() {
+
+    DrawPiePlot(user_category, user_year);
+
+    DrawLinePlot(user_country_name);
+
+};
+
+DrawPlots();
+
 // LIEF'S CODE ABOVE
 
 // Create trace for vertical bar chart 
