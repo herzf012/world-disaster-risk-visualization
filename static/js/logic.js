@@ -74,7 +74,7 @@ function createChoropleth(selectedYear) {
 function DrawPiePlot(selectedYear, selectedCategory) {
 
     console.log("DrawPiePlot");
-    console.log(`Category: ${selectedCategory}`);
+    console.log(`Category!!!: ${selectedCategory}`);
     console.log(`Year: ${selectedYear}`);
 
     d3.json("/wri_index").then(data => {
@@ -325,7 +325,7 @@ function optionsChanged() {
 
     generalInfo(selected_parameters["user_year"], selected_parameters["user_country"]);
 
-    DrawPiePlot(selected_parameters["user_year"], selected_parameters["user_country"]);
+    DrawPiePlot(selected_parameters["user_year"], selected_parameters["user_category"]);
 
     DrawLinePlot(selected_parameters["user_country"]);
 }
@@ -334,12 +334,6 @@ function yearChanged(selectedYear) {
     console.log(selectedYear);
     selected_parameters["user_year"] = selectedYear;
     console.log(selected_parameters["user_year"]);
-
-    // updateChoropleth(selectedYear);
-
-    // DrawPiePlot("wri_category", selectedYear);
-
-    // generalInfo(selectedYear, "Afghanistan");
 }
 
 function categoryChanged(selectedCategory) {
@@ -352,10 +346,6 @@ function countryChanged(selectedCountry) {
     console.log(selectedCountry);
     selected_parameters["user_country"] = selectedCountry;
     console.log(selected_parameters["user_country"]);
-
-    // DrawLinePlot(selectedCountry);
-
-    // generalInfo("2011", selectedCountry);
 }
 
 function unique(value, index, self) {
