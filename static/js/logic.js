@@ -65,7 +65,8 @@ function createChoropleth(selectedYear) {
                 "WRI Score: " + feature.properties[`wri_${selectedYear}`]);
             }
 
-        }).addTo(myMap);    
+        }).addTo(myMap);
+
 
     });
 }
