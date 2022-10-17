@@ -9,15 +9,25 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
+let firstTime = true;
+
+let geojson;
+
+function updateChoropleth(selectedYear) {
+    if (firstTime) {
+        createChoropleth(selectedYear);
+        firstTime = false;
+    } else {
+        myMap.removeLayer(geojson);
+        createChoropleth(selectedYear);
+    }
+}
+
 function createChoropleth(selectedYear) {
     console.log("createChoropleth");
 
-    let geojson;
-
     // Get the data with d3.
     d3.json("/get_geojson").then(function(data) {
-
-        console.log(data);
 
         // create choropleth layer 
         geojson = L.choropleth(data, {
@@ -41,7 +51,8 @@ function createChoropleth(selectedYear) {
 
             // Binding a popup to each layer
             onEachFeature: function(feature, layer) {
-                layer.bindPopup(feature.properties.ADMIN);
+                layer.bindPopup("<strong>" + feature.properties.ADMIN + "</strong><br />" +
+                "WRI Score: " + feature.properties[`wri_${selectedYear}`]);
             }
 
         }).addTo(myMap);    
@@ -52,7 +63,7 @@ function createChoropleth(selectedYear) {
 function yearChanged(selectedYear) {
     console.log(selectedYear);
 
-    createChoropleth(selectedYear);
+    updateChoropleth(selectedYear);
 }
 
 function categoryChanged(selectedCategory) {
@@ -94,7 +105,7 @@ function InitDashboard() {
         let initialCategory = category_selector.property("value");
         console.log(`initialCategory = ${initialCategory}`);
 
-        createChoropleth(selectedYear);
+        updateChoropleth(selectedYear);
 
     });
 }
