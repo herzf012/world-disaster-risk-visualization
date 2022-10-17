@@ -64,13 +64,6 @@ function createChoropleth(selectedYear) {
     });
 }
 
-
-// LIEF'S CODE BELOW
-
-function wait() {
-    console.log("waiting...");
-}
-
 // Function to draw a donut chart by category and year
 function DrawPiePlot(selectedCategory, selectedYear) {
 
@@ -275,7 +268,47 @@ function DrawLinePlot(selected_country_name) {
     });
 
 };
-// LIEF'S CODE ABOVE
+
+// Function to display country info based on country and year
+function generalInfo(selectedYear, selectedCountry) {
+    console.log("generalInfo()");
+
+    d3.json("/wri_index").then(data => {
+
+        let country_data = data.filter(element => element.country_name == selectedCountry);
+        country_data = country_data.filter(element => element.year == selectedYear)[0];
+
+        console.log(country_data);
+
+        // Set letiables to pull out relavent data
+        let country_name = country_data.country_name;
+        let wri = country_data.wri;
+        let exposure = country_data.exposure;
+        let vulnerability = country_data.vulnerability;
+        let susceptibility = country_data.susceptibility;
+        let coping_inability = country_data.coping_inability;
+        let adaptive_inability = country_data.adaptive_inability;
+        let exposure_category = country_data.exposure_category;
+        let wri_category = country_data.wri_category;
+        let vulnerability_category = country_data.vulnerability_category;
+        let susceptibility_category = country_data.susceptibility_category;
+
+        // Display data on webpage
+        document.getElementById("country-name").innerHTML = `country_name: ${country_name}`;
+        document.getElementById("wri").innerHTML = `wri: ${wri}`;
+        document.getElementById("exposure").innerHTML = `exposure: ${exposure}`;
+        document.getElementById("vulnerability").innerHTML = `vulnerability: ${vulnerability}`;
+        document.getElementById("susceptibility").innerHTML = `susceptibility: ${susceptibility}`;
+        document.getElementById("coping-inability").innerHTML = `coping_inability: ${coping_inability}`;
+        document.getElementById("adaptive-inability").innerHTML = `adaptive_inability: ${adaptive_inability}`;
+        document.getElementById("exposure-category").innerHTML = `exposure_category: ${exposure_category}`;
+        document.getElementById("wri-category").innerHTML = `wri_category: ${wri_category}`;
+        document.getElementById("vulnerability-category").innerHTML = `vulnerability_category: ${vulnerability_category}`;
+        document.getElementById("susceptibility-category").innerHTML = `susceptibility_category: ${susceptibility_category}`;
+
+    });
+
+}
 
 // Updates maps and graphs based on year selection
 function yearChanged(selectedYear) {
@@ -292,6 +325,8 @@ function categoryChanged(selectedCategory) {
 
 function countryChanged(selectedCountry) {
     console.log(selectedCountry);
+
+    DrawLinePlot(selectedCountry);
 }
 
 function unique(value, index, self) {
@@ -306,7 +341,7 @@ function InitDashboard() {
 
     let category_selector = d3.select("#selCategory");
 
-    let country_selector = d3.select("selCountry");
+    let country_selector = d3.select("#selCountry");
 
     d3.json("/wri_index").then(data => {
 
@@ -341,18 +376,19 @@ function InitDashboard() {
         // Populate country dropdown
         for (let i = 0; i < countries.length; i++) {
             selectedCountry = countries[i];
-            console.log(selectedCountry);
             country_selector.append("option").text(selectedCountry).property("value", selectedCountry);
         };
 
-        // let initialCountry = country_selector.property("value");
-        // console.log(`initialCountry = ${initialCountry}`);
+        let initialCountry = country_selector.property("value");
+        console.log(`initialCountry = ${initialCountry}`);
 
         updateChoropleth(initialYear);
 
+        generalInfo(initialYear, initialCountry);
+
         DrawPiePlot(initialCategory, initialYear);
 
-        DrawLinePlot("Zambia");
+        DrawLinePlot(initialCountry);
 
     });
 }
