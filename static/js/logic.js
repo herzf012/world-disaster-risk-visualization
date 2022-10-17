@@ -171,7 +171,7 @@ function DrawPiePlot(selectedYear, selectedCategory) {
         console.log(`Here are the options: ${options}`);
 
         // Plot donut chart
-        var chart = new ApexCharts(document.querySelector("#apex-donut-chart"), options);
+        let chart = new ApexCharts(document.querySelector("#apex-donut-chart"), options);
         chart.render();
 
     });
@@ -192,7 +192,7 @@ function DrawLinePlot(selected_country_name) {
         console.log(country_name);
 
         // Set up options for ApexChart
-        var options = {
+        let options = {
             series: [
             {
                 name: "WRI",
@@ -269,12 +269,19 @@ function DrawLinePlot(selected_country_name) {
         };
         
         // Plot line chart
-        var chart = new ApexCharts(document.querySelector("#apex-line-chart"), options);
-        chart.render();
+        let chart = new ApexCharts(document.querySelector("#apex-line-chart"), options);
+        sleep(500).then(() => {
+            chart.render();
+        });
+        // chart.render();
         
     });
 
 };
+
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
 
 // Function to display country info based on country and year
 function generalInfo(selectedYear, selectedCountry) {
@@ -318,17 +325,37 @@ function generalInfo(selectedYear, selectedCountry) {
 }
 
 // Updates maps and graphs based on year selection
+let firstIterative = true;
+
 function optionsChanged() {
     console.log("optionsChanged()");
     console.log(selected_parameters);
 
-    updateChoropleth(selected_parameters["user_year"]);
+    if (firstIterative) {
 
-    generalInfo(selected_parameters["user_year"], selected_parameters["user_country"]);
+        updateChoropleth(selected_parameters["user_year"]);
 
-    DrawPiePlot(selected_parameters["user_year"], selected_parameters["user_category"]);
+        generalInfo(selected_parameters["user_year"], selected_parameters["user_country"]);
 
-    DrawLinePlot(selected_parameters["user_country"]);
+        DrawPiePlot(selected_parameters["user_year"], selected_parameters["user_category"]);
+
+        DrawLinePlot(selected_parameters["user_country"]);
+
+        firstIterative = false;
+
+        sleep(5000).then(() => {
+            optionsChanged();
+        });
+
+    } else {
+
+        DrawPiePlot(selected_parameters["user_year"], selected_parameters["user_category"]);
+
+        DrawLinePlot(selected_parameters["user_country"]);
+
+        firstIterative = true;
+
+    }
 }
 
 function yearChanged(selectedYear) {
