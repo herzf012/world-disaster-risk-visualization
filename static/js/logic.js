@@ -469,13 +469,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-let geoData= "PUT THE CALL TO THE DATA HERE"
+let geoData= "PUT THE CALL TO THE DATA HERE";
 
 let geojson;
 
-
 // Get the data with d3.
-d3.json(geoData).then(function(data) {
+d3.json("/get_geojson").then(function(data) {
+
+    console.log(data);
 
     // create choropleth layer 
     geojson = L.choropleth(data, {

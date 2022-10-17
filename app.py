@@ -11,6 +11,7 @@ from sqlalchemy import inspect
 
 # Import any remaining functions
 import json
+import os
 
 # Import connection params from connection_config.py
 from config import sql_username, sql_password, sql_database, sql_port_number
@@ -63,6 +64,18 @@ def DashboardRoute():
     # to pass in anything at all (which would make a lot more sense in this case).
     webpage = render_template("dashboard.html")
     return webpage
+
+# LIEF'S CODE BELOW
+@app.route("/get_geojson")
+def GeoJsonRoute():
+
+    filepath = os.path.join("static", "data", "countries_wri.geojson")
+
+    with open(filepath) as jsonfile:
+        geojson = json.load(jsonfile)
+
+    return jsonify(geojson)
+# LIEF'S CODE ABOVE
 
 @app.route("/wri_index")
 def WriRoute():
