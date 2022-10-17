@@ -14,6 +14,12 @@ let firstTime = true;
 
 let geojson;
 
+let selected_parameters = {
+    user_year: "",
+    user_category: "",
+    user_country: ""
+};
+
 // Function updates choropleth map based on year selection
 function updateChoropleth(selectedYear) {
     if (firstTime) {
@@ -65,7 +71,7 @@ function createChoropleth(selectedYear) {
 }
 
 // Function to draw a donut chart by category and year
-function DrawPiePlot(selectedCategory, selectedYear) {
+function DrawPiePlot(selectedYear, selectedCategory) {
 
     console.log("DrawPiePlot");
     console.log(`Category: ${selectedCategory}`);
@@ -311,22 +317,45 @@ function generalInfo(selectedYear, selectedCountry) {
 }
 
 // Updates maps and graphs based on year selection
+function optionsChanged() {
+    console.log("optionsChanged()");
+    console.log(selected_parameters);
+
+    updateChoropleth(selected_parameters["user_year"]);
+
+    generalInfo(selected_parameters["user_year"], selected_parameters["user_country"]);
+
+    DrawPiePlot(selected_parameters["user_year"], selected_parameters["user_country"]);
+
+    DrawLinePlot(selected_parameters["user_country"]);
+}
+
 function yearChanged(selectedYear) {
     console.log(selectedYear);
+    selected_parameters["user_year"] = selectedYear;
+    console.log(selected_parameters["user_year"]);
 
-    updateChoropleth(selectedYear);
+    // updateChoropleth(selectedYear);
 
-    DrawPiePlot("wri_category", selectedYear);
+    // DrawPiePlot("wri_category", selectedYear);
+
+    // generalInfo(selectedYear, "Afghanistan");
 }
 
 function categoryChanged(selectedCategory) {
     console.log(selectedCategory);
+    selected_parameters["user_category"] = selectedCategory;
+    console.log(selected_parameters["user_category"]);
 }
 
 function countryChanged(selectedCountry) {
     console.log(selectedCountry);
+    selected_parameters["user_country"] = selectedCountry;
+    console.log(selected_parameters["user_country"]);
 
-    DrawLinePlot(selectedCountry);
+    // DrawLinePlot(selectedCountry);
+
+    // generalInfo("2011", selectedCountry);
 }
 
 function unique(value, index, self) {
@@ -382,11 +411,15 @@ function InitDashboard() {
         let initialCountry = country_selector.property("value");
         console.log(`initialCountry = ${initialCountry}`);
 
+        selected_parameters["user_year"] = initialYear;
+        selected_parameters["user_category"] = initialCategory;
+        selected_parameters["user_country"] = initialCountry;
+
         updateChoropleth(initialYear);
 
         generalInfo(initialYear, initialCountry);
 
-        DrawPiePlot(initialCategory, initialYear);
+        DrawPiePlot(initialYear, initialCategory);
 
         DrawLinePlot(initialCountry);
 
