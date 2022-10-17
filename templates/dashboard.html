@@ -66,9 +66,9 @@
     <div class="row">
 
       <div class="text-center">
-            <h1>How to Work the Dashboard</h1>
-            <br>
-            <br>
+        <h1>How to Work the Dashboard</h1>
+        <br>
+        <br>
       </div>
     </div>
   </div>
@@ -85,79 +85,74 @@
       </div>
 
       <div class="col-lg-5 col-md-12"> 
-       <div class ="row">
-        <p>this is where I will put the information about the pie chart once I know what it does, but it looks very nice.</p> 
-        <br>
-        <p>The bar chart shows the Top 100 Contries with the lowest World Risk Index for the year you selected. Hover your mouse over the graph to see the specific value and the country.</p>
+        <div class ="row">
+          <p>this is where I will put the information about the pie chart once I know what it does, but it looks very nice.</p> 
+          <br>
+          <p>The bar chart shows the Top 100 Contries with the lowest World Risk Index for the year you selected. Hover your mouse over the graph to see the specific value and the country.</p>
         </div>    
-       </div>         
+      </div>         
     </div>      
-    </div>
+  </div>
 
-    <br>
-    <br>
+  <br>
+  <br>
 
     <!-- The map  -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-12">
-          <!-- The div that holds our map -->
-          <div id="map" style="width:600px; height: 400px"></div>
-  
-          <!-- Our JavaScript file -->
-          <script type="text/javascript" src="../static/js/logic.js"></script>
-      
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <!-- The div that holds our map -->
+        <div id="map" style="width:600px; height: 400px"></div>
+      </div>
 
-    <!-- The drop down bar and data  -->
-        <div class="col-lg-5 col-md-12">
-          <div class="well">
-            <h5>Year :</h5>
-            <select id="selDataset" onchange="optionChanged(this.value)"></select>
-          </div> 
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h5 class="panel-title">Country Information</h>
-            </div>
-            <div id="sample-metadata" class="panel-body"></div>
+      <div class="col-lg-6 col-md-12">
+        <div class="well">
+          <h5>Year:</h5>
+          <select id="selYear" onchange="yearChanged(this.value)"></select>
+          <h5>Category:</h5>
+          <select id="selCategory" onchange="categoryChanged(this.value)"></select>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Country Info</h3>
+          </div>
+          <div id="country-info" class="panel-body">
+            <h5 id="country-name">boop</h5>
+            <h5 id="wri">boop</h5>
+            <h5 id="exposure">boop</h5>
+            <h5 id="vulnerability">boop</h5>
+            <h5 id="susceptibility">boop</h5>
+            <h5 id="coping-inability">boop</h5>
+            <h5 id="adaptive-inability">boop</h5>
+            <h5 id="exposure-category">boop</h5>
+            <h5 id="wri-category">boop</h5>
+            <h5 id="vulnerability-category">boop</h5>
+            <h5 id="susceptibility-category">boop</h5>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Our JavaScript file -->
+  <script type="text/javascript" src="../static/js/logic.js"></script>
 
   <br>
   <br>
 
   <!-- Adding APEX Charts -->
- <div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-6">
-      <div id="apex-line-chart"></div>
-    </div>
-    <div class="col-lg-4 col-md-6">
-      <div id="apex-donut-chart">
-        <script src="static/js/plot.js"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-6">
+        <div id="apex-line-chart"></div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div id="apex-donut-chart">
+          <script src="static/js/plot.js"></script>
+        </div>
       </div>
     </div>
-  </div>
-</div>      
-
-
-<!-- The div that holds our map: HYEEUN -->
-<div class ="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div id="barChart">
-        <div id="bar"></div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-
-      
+  </div>      
 
     <!-- Import the Bootstrap JavaScript code -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
