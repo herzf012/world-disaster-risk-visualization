@@ -469,8 +469,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-let geoData= "PUT THE CALL TO THE DATA HERE";
-
 let geojson;
 
 // Get the data with d3.
@@ -482,7 +480,7 @@ d3.json("/get_geojson").then(function(data) {
     geojson = L.choropleth(data, {
 
         // define property in the features to use 
-        valueProperty: "VALUE YOU ARE LOOKING FOR (MAYBE wri_2011, etc..",
+        valueProperty: "wri_2011",
 
         // set colors 
         scale:["#ffffb2", "#b10026"],
@@ -497,6 +495,7 @@ d3.json("/get_geojson").then(function(data) {
             weight: 1,
             fillOpacity:0.8
         },
-    }).addTo(myMap);
+    }).addTo(myMap);    
+
 
   });
