@@ -1,4 +1,3 @@
-
 // Creating the map 
 let myMap = L.map("map", {
     center: [20.771523, -34.566583],
@@ -10,38 +9,50 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-let geojson;
+function createChoropleth(selectedYear) {
+    console.log("createChoropleth");
 
-// Get the data with d3.
-d3.json("/get_geojson").then(function(data) {
+    let geojson;
 
-    console.log(data);
+    // Get the data with d3.
+    d3.json("/get_geojson").then(function(data) {
 
-    // create choropleth layer 
-    geojson = L.choropleth(data, {
+        console.log(data);
 
-        // define property in the features to use 
-        valueProperty: "wri_2011",
+        // create choropleth layer 
+        geojson = L.choropleth(data, {
 
-        // set colors 
-        scale:["#ffffb2", "#b10026"],
+            // define property in the features to use 
+            valueProperty: `wri_${selectedYear}`,
 
-        // step range 
-        steps: 10,
+            // set colors 
+            scale:["#ffffb2", "#b10026"],
 
-        // quartile, equidistant, k-means 
-        mode: "q",
-        style: {
-            color:"#fff",
-            weight: 1,
-            fillOpacity:0.8
-        },
-    }).addTo(myMap);    
+            // step range 
+            steps: 10,
 
-});
+            // quartile, equidistant, k-means 
+            mode: "q",
+            style: {
+                color:"#fff",
+                weight: 1,
+                fillOpacity:0.8
+            },
+
+            // Binding a popup to each layer
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(feature.properties.ADMIN);
+            }
+
+        }).addTo(myMap);    
+
+    });
+}
 
 function yearChanged(selectedYear) {
     console.log(selectedYear);
+
+    createChoropleth(selectedYear);
 }
 
 function categoryChanged(selectedCategory) {
@@ -82,6 +93,8 @@ function InitDashboard() {
 
         let initialCategory = category_selector.property("value");
         console.log(`initialCategory = ${initialCategory}`);
+
+        createChoropleth(selectedYear);
 
     });
 }
