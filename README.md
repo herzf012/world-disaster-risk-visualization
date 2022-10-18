@@ -157,6 +157,7 @@ This project is confirmed to work on these verions of software:
 
 # References and Acknowledgements
 ---
+#### References:
 ##### [1] Mrinal Tyagi, September 2022 , World Disaster Risk Dataset ,Initial Version, Retrieved [September 29th 2022] from [https://www.kaggle.com/datasets/tr1gg3rtrash/global-disaster-risk-index-time-series-dataset](https://www.kaggle.com/datasets/tr1gg3rtrash/global-disaster-risk-index-time-series-dataset)
 
 ##### [2] DataHub; Natural Earth, 2018, Country Polygons as GeoJSON, Retrieved [October 3rd 2022] from [https://datahub.io/core/geo-countries#javascript](https://datahub.io/core/geo-countries#javascript) 
