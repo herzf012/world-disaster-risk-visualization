@@ -14,6 +14,7 @@ let firstTime = true;
 
 let geojson;
 
+// Initialize dictionary to hold changes for dashboard
 let selected_parameters = {
     user_year: "",
     user_category: "",
@@ -22,19 +23,25 @@ let selected_parameters = {
 
 // Function updates choropleth map based on year selection
 function updateChoropleth(selectedYear) {
+    console.log("updateChoropleth()");
     if (firstTime) {
+
         createChoropleth(selectedYear);
+
         firstTime = false;
+
     } else {
+
         myMap.removeLayer(geojson);
+
         createChoropleth(selectedYear);
+
     }
 }
 
 // Function creates wri score layer for choropleth map
 function createChoropleth(selectedYear) {
-    console.log("createChoropleth");
-    console.log(`choro year: ${selectedYear}`);
+    console.log("createChoropleth.()");
 
     // Get the data with d3.
     d3.json("/get_geojson").then(function(data) {
@@ -67,16 +74,14 @@ function createChoropleth(selectedYear) {
 
         }).addTo(myMap);
 
-
     });
+
 }
 
 // Function to draw a donut chart by category and year
 function DrawPiePlot(selectedYear, selectedCategory) {
 
-    console.log("DrawPiePlot");
-    console.log(`Category!!!: ${selectedCategory}`);
-    console.log(`Year: ${selectedYear}`);
+    console.log("DrawPiePlot()");
 
     d3.json("/wri_index").then(data => {
 
@@ -91,8 +96,6 @@ function DrawPiePlot(selectedYear, selectedCategory) {
         } else {
             chart_title = `Susceptibility Category ${selectedYear}`;
         };
-
-        console.log(`Chart Title ${chart_title}`)
 
         // Filter and select the data by year and category
         let my_data = data.filter(element => element.year == selectedYear);
@@ -124,8 +127,6 @@ function DrawPiePlot(selectedYear, selectedCategory) {
                 rank_count.na++;
             };
         };
-
-        console.log(rank_count);
 
         // Create options for donut chart
         let options = {
@@ -168,8 +169,6 @@ function DrawPiePlot(selectedYear, selectedCategory) {
             }]
         };
 
-        console.log(`Here are the options: ${options}`);
-
         // Plot donut chart
         let chart = new ApexCharts(document.querySelector("#apex-donut-chart"), options);
         chart.render();
@@ -180,7 +179,7 @@ function DrawPiePlot(selectedYear, selectedCategory) {
 // Function to draw a line chart by country name
 function DrawLinePlot(selected_country_name) {
 
-    console.log("DrawLinePlot");
+    console.log("DrawLinePlot()");
 
     d3.json("/wri_index").then(data => {
 
@@ -188,8 +187,6 @@ function DrawLinePlot(selected_country_name) {
         let my_data = data.filter(element => element.country_name == selected_country_name);
 
         let country_name = my_data.map(element => element.country_name)[0];
-
-        console.log(country_name);
 
         // Set up options for ApexChart
         let options = {
@@ -270,15 +267,13 @@ function DrawLinePlot(selected_country_name) {
         
         // Plot line chart
         let chart = new ApexCharts(document.querySelector("#apex-line-chart"), options);
-        sleep(500).then(() => {
-            chart.render();
-        });
-        // chart.render();
+        chart.render();
         
     });
 
 };
 
+// Function to allow data to load and update for line and pie chart
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -291,8 +286,6 @@ function generalInfo(selectedYear, selectedCountry) {
 
         let country_data = data.filter(element => element.country_name == selectedCountry);
         country_data = country_data.filter(element => element.year == selectedYear)[0];
-
-        console.log(country_data);
 
         // Set letiables to pull out relavent data
         let country_name = country_data.country_name;
@@ -324,12 +317,10 @@ function generalInfo(selectedYear, selectedCountry) {
 
 }
 
-// Updates maps and graphs based on year selection
+// Function to implement any changes made on the dashboard. Two iterations needed for data to be loaded properly
 let firstIterative = true;
-
 function optionsChanged() {
     console.log("optionsChanged()");
-    console.log(selected_parameters);
 
     if (firstIterative) {
 
@@ -358,24 +349,25 @@ function optionsChanged() {
     }
 }
 
+// Updates year change on click
 function yearChanged(selectedYear) {
-    console.log(selectedYear);
+    console.log("yearChanged()");
     selected_parameters["user_year"] = selectedYear;
-    console.log(selected_parameters["user_year"]);
 }
 
+// Updates category change on click
 function categoryChanged(selectedCategory) {
-    console.log(selectedCategory);
+    console.log("categoryChanged()");
     selected_parameters["user_category"] = selectedCategory;
-    console.log(selected_parameters["user_category"]);
 }
 
+// Updates country change on click
 function countryChanged(selectedCountry) {
-    console.log(selectedCountry);
+    console.log("countryChanged()");
     selected_parameters["user_country"] = selectedCountry;
-    console.log(selected_parameters["user_country"]);
 }
 
+// Function to compute unique values in a list
 function unique(value, index, self) {
     return self.indexOf(value) == index;
 }
